@@ -1,0 +1,72 @@
+        <div class="ui equal height grid">
+
+          <div class="sixteen wide middle aligned column">
+            <div class="ui top segment">
+              <div class="ui sizer vertical segment" id="date-time">
+                <p class="ui center aligned small header" id="date">date</p>
+                <p class="ui center aligned small header" style="display:none;" id="days-year">doy</p>
+                <h1 class="ui center aligned huge header" id="time">time</h1>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:0 1em;" class="sixteen wide middle aligned column">
+
+            <table class="ui table">
+              <thead>
+                <tr>
+                  <th class="left aligned four wide">Prayer</th>
+                  <th class="center aligned four wide">Adhan</th>
+                  <th class="center aligned four wide">Iqama</th>
+                  <th class="center aligned four wide arabic">صلاة</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% prayer_names = [["fajr","الفجر"], ["shurooq", "الشروق"], ["dhuhr", "الظهر"], ["asr", "العصر"], ["maghrib", "المغرب"], ["isha", "العشاء"]]
+                #Enum.each(prayer_names,  &IO.inspect/1) %>
+              <%= for prayer <- prayer_names do %>
+                <tr id="row-<%= List.first(prayer) %>">
+                  <td id="prayer-name-<%= List.first(prayer) %>"><%= List.first(prayer) %></td>
+                  <td class="center aligned" id="prayer-time-<%= List.first(prayer) %>"></td>
+                  <td class="center aligned" id="jamaah-time-<%= List.first(prayer) %>"></td>
+                  <td class="arabic" id="prayer-name-<%= List.first(prayer) %>"><%= List.last(prayer) %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+
+          </div>
+
+
+
+          <div class="sixteen wide middle aligned column">
+            <div class="ui equal width grid">
+              <div class="middle aligned stretched column">      
+                <p style="text-align:right;">Next prayer</p>
+              </div>
+              <div class="center aligned column">      
+                <p><span id="pending-name"></span></p>
+              </div>
+              <div class="left aligned column">      
+                <p id="timetoprayer"></p>
+                <!--<p id="timetofast"></p>-->
+              </div>
+            </div>
+          </div>
+
+          <div  style="padding:0 1em;" class="sixteen wide middle aligned text1 column">
+            <div class="ui bottom segment">
+              <h4 class="ui horizontal divider header">
+                <i class="info icon"></i><%= @settings["title"] %>
+              </h4>
+              <%= Phoenix.HTML.Format.text_to_html(@settings["body"], attributes: [class: "arabic"]) %>
+            </div>
+          </div>
+
+          <div class="sixteen wide middle aligned text2 column">
+            <div class="ui bottom segment">
+              <%= Phoenix.HTML.Format.text_to_html(@settings["announcement"], wrapper_tag: :h1, attributes: [class: "header arabic"]) %>
+            </div>
+          </div>
+
+        </div>

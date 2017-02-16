@@ -1,0 +1,23 @@
+      <div class="ui basic segment slider">
+        <%= for poster <- @posters do %>
+        <% [id, title, body, date, image, url] = poster %>
+        <%  { date, _time } = date %>
+        <% {_, date} = Date.from_erl(date) %>
+        <div>
+          <img style="height:826px;" src='<%= "/images/icci/#{id}/#{image}" %>' title="" class="ui fluid image">
+          <div style="height:210px;padding:5px 10px 25px;margin:10px 5px;text-align:justify;">
+            <h3 class="ui top attached segment header">
+              <%= Curtail.truncate(HtmlSanitizeEx.strip_tags(title), word_boundary: ~r/\S[\.]/, length: 68, omission: "...") %>
+            </h3>
+            <h4 class="ui middle attached segment">
+              <%= Curtail.truncate(HtmlSanitizeEx.strip_tags(body), word_boundary: ~r/\S[\.]/, length: 420, omission: "...") %>
+            </h4>
+
+            <h5 class="ui bottom attached segment header">
+              <span style="float:left;"><i class=" icon write"></i><%= posted = Timex.format!(date, "%e-%b-%Y", :strftime) %></span>
+              <span style="float:right;margin-right:5px;"><i class="icon mouse pointer"></i>http://islamireland.ie/news/<%= url %></span>
+            </h5>
+          </div>
+        </div>
+        <% end %>
+      </div>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Timetable</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/reset.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/semantic.min.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/changa.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/roboto.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/jquery.bxslider.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/present.css") %>">
+
+  </head>
+
+<body id="page">
+    <div id="refresh">
+      <div class="fadein"></div>
+      <div id="message-text" class="black"></div>
+      <div class="fadeout"></div>
+    </div>
+    <%= render @view_module, @view_template, assigns %>
+
+    <script src='<%= static_path(@conn, "/js/jquery-2.2.4.min.js") %>'></script>
+    <script src='<%= static_path(@conn, "/js/moment.min.js") %>'></script>
+    <script src='<%= static_path(@conn, "/js/moment-timezone-with-data.js") %>'></script>
+    <script src='<%= static_path(@conn, "/js/moment-hijri.js") %>'></script>
+
+    <script src='<%= static_path(@conn, "/js/db/timetable.js") %>'></script>
+    <script src='<%= static_path(@conn, "/js/db/read-json.js") %>'></script>
+    <script src='<%= static_path(@conn, "/js/time.js") %>'></script>
+    
+    <script src='<%= static_path(@conn, "/js/semantic.min.js") %>'></script>
+    <script src='<%= static_path(@conn, "/js/jquery.bxslider.min.js") %>'></script>
+
+
+    <!--<script src='<%= static_path(@conn, "/js/phoenix_live_reload.js") %>'></script>
+    <script src='<%= static_path(@conn, "/js/socket.js") %>'></script>-->
+    <script>
+      $(document)
+        .ready(function() {
+
+            $('.slider').bxSlider({
+            mode: 'vertical',//horizontal, fade
+            speed: 1500,
+            pause: 10000,
+            pager: false,
+            responsive: true,
+            useCSS: true,
+            //slideWidth: '720px',
+            auto: true,
+            controls: false
+            //autoControls: true
+            });
+
+            $('.slider2').bxSlider({
+            mode: 'fade',//vertical, horizontal, fade
+            captions: true,
+            speed: 1500,
+            pause: 3000,
+            pager: false,
+            responsive: true,
+            useCSS: true,
+            //slideWidth: '720px',
+            auto: true,
+            //ticker: true,
+            controls: false
+            //autoControls: true
+            });
+
+        })
+        ;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+        <div class="sixteen wide left aligned column">
+
+            <h2 class="ui horizontal inverted divider header">
+              NEWS
+            </h2>
+
+            <div class="ui top segment">
+              <div class="sixteen wide column">
+                <div style="padding:0px 10px; height: 600px;" class="ui divided middle aligned striped list">
+                  <%= for news <- @highlights do %>
+                  <% [id, title, body, date, images] = news %>
+
+                  <div style="padding:10px 10px" class="item">
+                    <a><img src='<%= "/images/icci/#{id}/#{images}" %>' title="" class="ui avatar left floated image"></a>
+                    <div class="content">
+                      <h3 class="ui medium header"><%= title %></h3>
+                      <div class="description">
+                        <% opts = [wrapper_tag: :div, attributes: [class: "ui piled segment"]] %>
+                        <%text_to_html(body, opts)# |> safe_to_string %>
+                        <%#= HtmlSanitizeEx.basic_html(body) #|> safe_to_string %>
+                        <%= Curtail.truncate(HtmlSanitizeEx.strip_tags(body), word_boundary: ~r/\S[\.]/, length: 160, omission: "...")  %>
+                      </div>
+                    </div>
+                  </div>
+                  <% end %>
+
+                </div>
+              </div>
+            </div>
+
+            <h2 class="ui horizontal inverted divider header">
+              ACTIVITIES
+            </h2>
+  
+            <ul class="ui basic segment slider2" style="padding:0;">
+                <%= for item <- @gallery do %>
+                <% [id, title, date, image] = item %>
+                <%  { date, _time } = date %>
+                <% {_, date} = Date.from_erl(date) %>
+                    <li style="height:345px;padding: 0;">
+                    <img src='<%= "/images/icci/#{id}/#{image}" %>' title="<%= Curtail.truncate(HtmlSanitizeEx.strip_tags(title), word_boundary: ~r/\S[\.]/, length: 80, omission: "...") %>" class="ui fluid image">
+                    </li>
+                <% end %>
+            </ul>
+   
+        </div>

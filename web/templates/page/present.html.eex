@@ -1,0 +1,30 @@
+<style>
+    html, body {
+        height: 100%;
+    }
+
+    .ui.grid {
+        /*height: 100%;*/
+    }
+
+</style>
+
+
+<div class="ui present two column  equal height internally celled grid">
+
+  <div class="first six wide stretched column">
+    <%= render "present-col-1.html", posters: @posters %>
+  </div>
+
+  <div class="second five wide stretched column">
+    <%= render "present-col-2.html", highlights: @highlights, gallery: @gallery %>
+  </div>
+
+  <div class="third five wide stretched column">
+    <%= render "present-col-3.html", settings: @settings %>
+  </div>
+
+</div>
+
+<%= render "present-settings.html", settings: @settings, prayerjamaah: @prayerjamaah, messages: @messages %>
+

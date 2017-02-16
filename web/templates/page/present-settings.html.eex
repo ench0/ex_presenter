@@ -1,0 +1,17 @@
+  <div style="display:none;">
+    <% for prayer <- @prayerjamaah do %>
+      <span id="<%= prayer["name"] %>-method"><%= prayer["method"] %></span> <span id="<%= prayer["name"] %>-number"><%= prayer["jamaah_hour_calc"] %>:<%= prayer["jamaah_minute_calc"] %></span>
+    <% end %>
+
+    <%= for prayer <- @prayerjamaah do %>
+      <span id="<%= prayer["name"] %>-offset"><%= prayer["jamaah_offset"] %></span>
+    <% end %>
+
+    <span id="hijri-offset"><%= @settings["hijrioffset"] %></span>
+    <span id="refresh-timeout"><%= @settings["refreshtimeout"] %></span>
+
+    <%= for no <- 0..9 do %>
+      <span id="message<%=no%>"><%= @messages["message#{no}"] %></span>
+    <% end %>
+
+  </div>

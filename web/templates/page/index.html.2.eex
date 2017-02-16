@@ -1,0 +1,120 @@
+<style>
+    html, body {
+        height: 100%;
+    }
+
+    .ui.grid {
+        height: 100%;
+    }
+</style>
+
+
+<div class="ui padded equal height grid basic segment">
+
+  <!--<div class="one wide purple column">
+  </div>-->
+
+  <div class="sixteen wide stretched column">
+    <div class="ui equal height grid">
+
+<!--      <div class="sixteen wide yellow container">
+        <h4 class="ui horizontal divider yellow header">
+          <strong>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</strong>
+        </h4>
+      </div>
+-->
+
+      <div class="sixteen wide yellow middle aligned column">
+        <h4 class="ui horizontal grey divider header">
+          Islamic Cultural Centre of Ireland
+        </h4>
+        <div class="ui sizer inverted grey vertical segment" id="date-time">
+          <p class="ui center aligned small header" id="date">date</p>
+          <!--<p class="ui center aligned small header" style="display:none;" id="days-year">doy</p>-->
+          <h1 class="ui center aligned huge header" id="time">time</h1>
+        </div>
+      </div>
+
+      <div class="sixteen wide yellow middle aligned column">
+
+        <table class="ui inverted grey table"><!-- three column celled -->
+          <thead>
+            <tr>
+              <th class="left aligned four wide">Prayer</th>
+              <th class="center aligned four wide">Time</th>
+              <th class="center aligned four wide">Jama'ah</th>
+              <th class="center aligned four wide arabic">صلاة</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% prayer_names = [["fajr","الفجر"], ["shurooq", "الشروق"], ["dhuhr", "الظهر"], ["asr", "العصر"], ["maghrib", "المغرب"], ["isha", "العشاء"]]
+            #Enum.each(prayer_names,  &IO.inspect/1) %>
+          <%= for prayer <- prayer_names do %>
+            <tr id="row-<%= List.first(prayer) %>">
+              <td id="prayer-name-<%= List.first(prayer) %>"><%= List.first(prayer) %></td>
+              <td class="center aligned" id="prayer-time-<%= List.first(prayer) %>"></td>
+              <td class="center aligned" id="jamaah-time-<%= List.first(prayer) %>"></td>
+              <td class="arabic" id="prayer-name-<%= List.first(prayer) %>"><%= List.last(prayer) %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+      </div>
+
+
+
+      <div class="sixteen wide grey middle aligned column">
+        <div class="ui equal width grid">
+          <div class="yellow right aligned column">      
+            <p>Next prayer</p>
+          </div>
+          <div class="grey center aligned column">      
+            <p><span id="pending-name"></span></p>
+          </div>
+          <div class="yellow left aligned column">      
+            <p id="timetoprayer"></p>
+            <!--<p id="timetofast"></p>-->
+          </div>
+        </div>
+      </div>
+
+      <div class="sixteen wide yellow middle aligned column">
+        <div class="ui grey inverted bottom segment">
+          <h4 class="ui horizontal divider header">
+            <i class="info icon"></i><%= @settings["title"] %>
+          </h4>
+          <p><%= Phoenix.HTML.Format.text_to_html(@settings["body"]) %></p>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+
+  <!--<div class="one wide purple column">
+  </div>-->
+</div>
+
+
+
+
+<div style="display:none;">
+  <% for prayer <- @prayerjamaah do %>
+    <span id="<%= prayer["name"] %>-method"><%= prayer["method"] %></span> <span id="<%= prayer["name"] %>-number"><%= prayer["jamaah_hour_calc"] %>:<%= prayer["jamaah_minute_calc"] %></span>
+  <% end %>
+
+  <%= for prayer <- @prayerjamaah do %>
+    <span id="<%= prayer["name"] %>-offset"><%= prayer["jamaah_offset"] %></span>
+  <% end %>
+
+  <span id="hijri-offset"><%= @settings["hijrioffset"] %></span>
+  <span id="refresh-timeout"><%= @settings["refreshtimeout"] %></span>
+
+  <%= for no <- 0..9 do %>
+    <span id="message<%=no%>"><%= @messages["message#{no}"] %></span>
+  <% end %>
+
+</div>
+
+
+
