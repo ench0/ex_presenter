@@ -47,7 +47,7 @@
             $('.slider').bxSlider({
             mode: 'vertical',//horizontal, fade
             speed: 1500,
-            pause: 10000,
+            pause: 20000,
             pager: false,
             responsive: true,
             useCSS: true,
