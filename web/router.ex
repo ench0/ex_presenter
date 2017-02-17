@@ -37,7 +37,7 @@ defmodule Presenter.Router do
   end
 
   scope "/present", Presenter do
-    pipe_through [:secure, :present_layout]
+    pipe_through :present_layout
     get "/", PageController, :present
 
     resources "/", PageController
